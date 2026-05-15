@@ -1,0 +1,6 @@
+;/*FB_PKG_DELIM*/
+
+__d("StoriesEnableLinkStickers.relayprovider",["qex"],(function(t,n,r,o,a,i,l){"use strict";var e={get:function(){var e;return(e=r("qex")._("5456"))!=null?e:!1}};l.default=e}),98);
+__d("StoriesMultiOptionPollSticker_enable_multi_option_poll_qe.relayprovider",["qex"],(function(t,n,r,o,a,i,l){"use strict";var e={get:function(){return r("qex")._("1525")===!0}};l.default=e}),98);
+__d("StoriesThreeDotsMenuEntryPoint_enable_entrypoint_qe.relayprovider",["gkx"],(function(t,n,r,o,a,i,l){"use strict";var e={get:function(){var e;return(e=r("gkx")("7128"))!=null?e:!1}};l.default=e}),98);
+__d("StoriesThreeDotsMenuRelay3D_enable_relay3d_qe.relayprovider",["gkx"],(function(t,n,r,o,a,i,l){"use strict";var e={get:function(){var e;return(e=r("gkx")("7128"))!=null?e:!1}};l.default=e}),98);

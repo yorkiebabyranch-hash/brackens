@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews - Bracken Doxies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f7f4;
+        }
+        
+        header {
+            background-color: #8b4513;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #ffd700;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            background-color: #d2691e;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+        }
+        
+        main {
+            padding: 3rem 0;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section h2 {
+            color: #8b4513;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .stat-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            color: #d2691e;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .stars {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .review-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #d2691e;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .reviewer-name {
+            font-weight: bold;
+            color: #8b4513;
+            font-size: 1.1rem;
+        }
+        
+        .review-rating {
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+        
+        .review-date {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+        
+        .review-text {
+            color: #555;
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .puppy-name {
+            color: #d2691e;
+            font-weight: bold;
+            display: inline-block;
+            background-color: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .info-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .info-box h3 {
+            color: #8b4513;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: #8b4513;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">🐾 Bracken Doxies</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="puppies.html">Puppies</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-title">
+        <div class="container">
+            <h1>Customer Reviews</h1>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="section">
+            <h2>What Our Families Say</h2>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-number">450+</div>
+                    <div class="stat-label">Happy Families</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stars">★★★★★</div>
+                    <div class="stat-label">4.9/5 Average Rating</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Would Recommend</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Sarah M.</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <div class="review-date">Adopted 18 months ago</div>
+                    <div class="review-text">
+                        "We couldn't have asked for a better experience! The team at Bracken Doxies was incredibly knowledgeable and caring. Our puppy Max arrived healthy and well-socialized. They've been supportive throughout his first year with us. Highly recommended!"
+                    </div>
+                    <div><span class="puppy-name">🐶 Max</span></div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">John & Lisa T.</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <div class="review-date">Adopted 10 months ago</div>
+                    <div class="review-text">
+                        "Our family has grown with little Bella! She has brought so much joy to our home. The health guarantee gave us peace of mind, and the ongoing support from the breeders has been amazing. She's the perfect addition to our family!"
+                    </div>
+                    <div><span class="puppy-name">🐶 Bella</span></div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Emily R.</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <div class="review-date">Adopted 6 months ago</div>
+                    <div class="review-text">
+                        "I was nervous about buying from a breeder, but Bracken Doxies exceeded all my expectations. Charlie is healthy, friendly, and has the sweetest personality. The entire process was transparent and professional."
+                    </div>
+                    <div><span class="puppy-name">🐶 Charlie</span></div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Marcus & Dawn K.</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <div class="review-date">Adopted 14 months ago</div>
+                    <div class="review-text">
+                        "Daisy has been such a wonderful companion. From the moment we brought her home, we could tell she was raised with love and care. The breeder followed up regularly to ensure Daisy was adjusting well. Best experience ever!"
+                    </div>
+                    <div><span class="puppy-name">🐶 Daisy</span></div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Patricia H.</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <div class="review-date">Adopted 8 months ago</div>
+                    <div class="review-text">
+                        "I've had dogs my whole life, and I've never experienced such professional and ethical breeding practices. Rusty is a dream dog—intelligent, loving, and perfectly healthy. Thank you for your dedication to the breed!"
+                    </div>
+                    <div><span class="puppy-name">🐶 Rusty</span></div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">David & Michelle P.</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <div class="review-date">Adopted 12 months ago</div>
+                    <div class="review-text">
+                        "Lucy has completely stolen our hearts! She arrived in perfect health with all the proper documentation and care instructions. The breeders genuinely care about their dogs and ensure every puppy goes to a loving home. We're forever grateful!"
+                    </div>
+                    <div><span class="puppy-name">🐶 Lucy</span></div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Angela C.</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <div class="review-date">Adopted 20 months ago</div>
+                    <div class="review-text">
+                        "We've had our Bracken Doxies puppy for over a year now, and she's been nothing but healthy and happy. The breeder's commitment to health testing and proper socialization really shows. Best decision we've made!"
+                    </div>
+                    <div><span class="puppy-name">🐶 Coco</span></div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Robert M.</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <div class="review-date">Adopted 9 months ago</div>
+                    <div class="review-text">
+                        "As someone who was particular about where I got my dog, Bracken Doxies was the right choice. Everything was handled professionally, and our puppy arrived healthy, well-adjusted, and ready to be loved. Couldn't ask for more!"
+                    </div>
+                    <div><span class="puppy-name">🐶 Oscar</span></div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Jennifer & Tom L.</span>
+                        <span class="review-rating">★★★★★</span>
+                    </div>
+                    <div class="review-date">Adopted 11 months ago</div>
+                    <div class="review-text">
+                        "We got Scout from Bracken Doxies, and it's been an absolute pleasure. The breeder's knowledge about the breed is impressive, and her commitment to each puppy's wellbeing is clear. Scout is thriving and bringing us endless joy!"
+                    </div>
+                    <div><span class="puppy-name">🐶 Scout</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="info-box">
+                <h3>💬 Why Families Choose Bracken Doxies</h3>
+                <p><strong>✓ Health First:</strong> All puppies come from health-tested parents and include a comprehensive health guarantee</p>
+                <p><strong>✓ Socialization:</strong> Puppies are raised in our home with family interaction from day one</p>
+                <p><strong>✓ Transparency:</strong> We're open about our breeding practices and always available to answer questions</p>
+                <p><strong>✓ Lifetime Support:</strong> We don't just hand over a puppy—we're with you every step of the journey</p>
+                <p><strong>✓ Quality Over Quantity:</strong> We breed responsibly with limited litters per year</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="info-box">
+                <h3>🌟 Ready to Join Our Family?</h3>
+                <p>If you'd like to learn more about our breeding program or inquire about available puppies, please don't hesitate to reach out. We'd love to help you find your perfect dachshund companion!</p>
+                <p><a href="contact.html" style="color: #d2691e; font-weight: bold; text-decoration: none;">➤ Contact Us Today</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Bracken Doxies. All rights reserved.</p>
+        <p>Breeding Excellence | Caring for Our Community</p>
+    </footer>
+</body>
+</html>

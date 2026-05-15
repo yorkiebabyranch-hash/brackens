@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Bracken Doxies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f7f4;
+        }
+        
+        header {
+            background-color: #8b4513;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #ffd700;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            background-color: #d2691e;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+        }
+        
+        main {
+            padding: 3rem 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .contact-info h2 {
+            color: #8b4513;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .info-label {
+            color: #d2691e;
+            font-weight: bold;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-content {
+            color: #666;
+            font-size: 1.05rem;
+        }
+        
+        .info-content a {
+            color: #8b4513;
+            text-decoration: none;
+        }
+        
+        .info-content a:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form h2 {
+            color: #8b4513;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            color: #8b4513;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #d2691e;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        button {
+            background-color: #8b4513;
+            color: white;
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #d2691e;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section h2 {
+            color: #8b4513;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .faq {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            color: #8b4513;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .faq-answer {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        footer {
+            background-color: #8b4513;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">🐾 Bracken Doxies</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="puppies.html">Puppies</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-title">
+        <div class="container">
+            <h1>Contact Us</h1>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="contact-grid">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                
+                <div class="info-item">
+                    <div class="info-label">📞 Phone</div>
+                    <div class="info-content">
+                        <a href="tel:+15551234567">(555) 123-4567</a><br>
+                        Mon-Fri: 9am - 6pm EST
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">✉️ Email</div>
+                    <div class="info-content">
+                        <a href="mailto:info@brackendoxies.com">info@brackendoxies.com</a><br>
+                        Response within 24 hours
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">📍 Location</div>
+                    <div class="info-content">
+                        Bracken Doxies<br>
+                        123 Dachshund Lane<br>
+                        Springfield, MO 65801<br>
+                        United States
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">🕐 Business Hours</div>
+                    <div class="info-content">
+                        Monday - Friday: 9:00 AM - 6:00 PM<br>
+                        Saturday: 10:00 AM - 4:00 PM<br>
+                        Sunday: By Appointment
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h2>Send us a Message</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">-- Select a subject --</option>
+                            <option value="inquiry">Puppy Inquiry</option>
+                            <option value="question">General Question</option>
+                            <option value="application">Adoption Application</option>
+                            <option value="breeding">Breeding Rights</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <div class="faq-question">How much do puppies cost?</div>
+                    <div class="faq-answer">
+                        Pricing varies based on the puppy's pedigree, color, coat type, and health certifications. Please contact us for current pricing information for available puppies.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Do you have a waiting list?</div>
+                    <div class="faq-answer">
+                        Yes, we maintain a waiting list for upcoming litters. Interested families are encouraged to apply and make a deposit to secure a spot on the list.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What's included in the health guarantee?</div>
+                    <div class="faq-answer">
+                        Our 2-year health guarantee covers genetic health issues. It includes veterinary examination, vaccinations, microchipping, and ongoing breeder support for the puppy's lifetime.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Can I visit before purchasing?</div>
+                    <div class="faq-answer">
+                        Absolutely! We encourage potential families to visit our home and meet our puppies and parents before making a commitment. Please contact us to schedule a visit.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Do you offer payment plans?</div>
+                    <div class="faq-answer">
+                        We work with families to find payment arrangements that work for them. Please discuss payment options when you contact us about available puppies.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">What if my circumstances change?</div>
+                    <div class="faq-answer">
+                        We have a return policy for puppies adopted from our program. No questions asked—we believe our dogs deserve loving homes, and we'll help find the right solution.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Are you AKC registered?</div>
+                    <div class="faq-answer">
+                        Our breeding dogs are AKC registered, and puppies are eligible for registration. AKC papers are available for an additional fee.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Do you breed long-haired or miniature dachshunds?</div>
+                    <div class="faq-answer">
+                        Currently, we specialize in standard wirehaired dachshunds. Please reach out to discuss your preferences—we may be able to refer you to reputable breeders if we don't have what you're looking for.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="text-align: center; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h2>We Look Forward to Hearing From You!</h2>
+            <p style="font-size: 1.1rem; color: #666;">
+                Whether you're inquiring about available puppies, have questions about our breeding program, or just want to chat about dachshunds, we'd love to connect with you. Your new family member might be waiting!
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Bracken Doxies. All rights reserved.</p>
+        <p>Breeding Excellence | Caring for Our Community</p>
+    </footer>
+</body>
+</html>

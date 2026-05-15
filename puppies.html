@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Puppies - Bracken Doxies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f7f4;
+        }
+        
+        header {
+            background-color: #8b4513;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #ffd700;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            background-color: #d2691e;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+        }
+        
+        main {
+            padding: 3rem 0;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section h2 {
+            color: #8b4513;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .puppies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .puppy-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .puppy-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        
+        .carousel img.active {
+            display: block;
+        }
+        
+        .carousel-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background-color: rgba(0,0,0,0.1);
+        }
+        
+        .carousel-controls button {
+            background-color: #8b4513;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .carousel-controls button:hover {
+            background-color: #d2691e;
+        }
+        
+        .puppy-actions {
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #d2691e;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #8b4513;
+        }
+        
+        .puppy-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #d2691e 0%, #8b4513 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        
+        .puppy-info {
+            padding: 1.5rem;
+        }
+        
+        .puppy-info h3 {
+            color: #8b4513;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .puppy-details {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            color: #d2691e;
+        }
+        
+        .detail-value {
+            color: #666;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-top: 0.8rem;
+        }
+        
+        .available {
+            background-color: #90ee90;
+            color: #2d5016;
+        }
+        
+        .reserved {
+            background-color: #ffb6c1;
+            color: #8b0000;
+        }
+        
+        .info-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .info-box h3 {
+            color: #8b4513;
+            margin-bottom: 1rem;
+        }
+        
+        .info-box ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .info-box li {
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: #8b4513;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">🐾 Bracken Doxies</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="puppies.html">Puppies</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-title">
+        <div class="container">
+            <h1>Available Puppies</h1>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="section">
+            <div class="info-box">
+                <h3>🎉 Current Litter Information</h3>
+                <p>We have a beautiful litter of standard wirehaired dachshund puppies ready for their forever homes! All puppies are health-checked, up-to-date on vaccinations, and come with our health guarantee.</p>
+            </div>
+
+            <h2>Meet Our Puppies</h2>
+            <div class="puppies-grid">
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-max">
+                        <img src="images/IMG_5449.JPG" alt="Max" class="active">
+                        <img src="images/IMG_5450.JPG" alt="Max">
+                        <img src="images/IMG_5451.JPG" alt="Max">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-max')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-max')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Max</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Energetic and playful, loves to explore and cuddle.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Max
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-bella">
+                        <img src="images/IMG_5490.JPG" alt="Bella" class="active">
+                        <img src="images/IMG_5491.JPG" alt="Bella">
+                        <img src="images/IMG_5492.JPG" alt="Bella">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-bella')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-bella')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Bella</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Sweet and gentle, perfect for families with children.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Bella
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-charlie">
+                        <img src="images/IMG_5496.JPG" alt="Charlie" class="active">
+                        <img src="images/IMG_5497.JPG" alt="Charlie">
+                        <img src="images/IMG_5498.JPG" alt="Charlie">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-charlie')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-charlie')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Charlie</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Curious and intelligent, always ready for adventure.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Charlie
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-daisy">
+                        <img src="images/IMG_5841.JPG" alt="Daisy" class="active">
+                        <img src="images/IMG_5842.JPG" alt="Daisy">
+                        <img src="images/IMG_5843.JPG" alt="Daisy">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-daisy')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-daisy')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Daisy</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Playful and affectionate, loves belly rubs and cuddles.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Daisy
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-rusty">
+                        <img src="images/IMG_5844.JPG" alt="Rusty" class="active">
+                        <img src="images/IMG_5845.JPG" alt="Rusty">
+                        <img src="images/IMG_5846.JPG" alt="Rusty">
+                        <img src="images/IMG_5847.JPG" alt="Rusty">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-rusty')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-rusty')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Rusty</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Adventurous and brave, loves outdoor activities.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Rusty
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-lucy">
+                        <img src="images/IMG_5848.JPG" alt="Lucy" class="active">
+                        <img src="images/IMG_5849.JPG" alt="Lucy">
+                        <img src="images/IMG_5850.JPG" alt="Lucy">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-lucy')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-lucy')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Lucy</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Gentle and loving, perfect for a quiet home.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Lucy
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-oliver">
+                        <img src="images/IMG_5851.JPG" alt="Oliver" class="active">
+                        <img src="images/IMG_5852.JPG" alt="Oliver">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-oliver')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-oliver')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Oliver</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Calm and affectionate, loves to nap close to you.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Oliver
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-sadie">
+                        <img src="images/IMG_5857.JPG" alt="Sadie" class="active">
+                        <img src="images/IMG_5858.JPG" alt="Sadie">
+                        <img src="images/IMG_5859.JPG" alt="Sadie">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-sadie')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-sadie')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Sadie</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Affectionate and curious, enjoys gentle playtime.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Sadie
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-coco">
+                        <img src="images/IMG_5860.JPG" alt="Coco" class="active">
+                        <img src="images/IMG_5861.JPG" alt="Coco">
+                        <img src="images/IMG_5862.JPG" alt="Coco">
+                        <img src="images/IMG_5863.JPG" alt="Coco">
+                        <img src="images/IMG_5864.JPG" alt="Coco">
+                        <img src="images/IMG_5865.JPG" alt="Coco">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-coco')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-coco')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Coco</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Sweet-natured and cuddly, loves quiet evenings.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Coco
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-milo">
+                        <img src="images/IMG_5866.JPG" alt="Milo" class="active">
+                        <img src="images/IMG_5867.JPG" alt="Milo">
+                        <img src="images/IMG_5868.JPG" alt="Milo">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-milo')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-milo')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Milo</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Friendly and playful, always ready for a game.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Milo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-penny">
+                        <img src="images/IMG_5869.JPG" alt="Penny" class="active">
+                        <img src="images/IMG_5872.JPG" alt="Penny">
+                        <img src="images/IMG_5871.JPG" alt="Penny">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-penny')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-penny')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Penny</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Bright and social, loves meeting new people.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Penny
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-finn">
+                        <img src="images/IMG_5873.JPG" alt="Finn" class="active">
+                        <img src="images/IMG_5874.JPG" alt="Finn">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-finn')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-finn')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Finn</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Gentle and curious, loves quiet exploration.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Finn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-willow">
+                        <img src="images/IMG_5875.JPG" alt="Willow" class="active">
+                        <img src="images/IMG_5876.JPG" alt="Willow">
+                        <img src="images/IMG_5877.JPG" alt="Willow">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-willow')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-willow')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Willow</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Soft-hearted and calm, enjoys gentle cuddles.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Willow
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-baxter">
+                        <img src="images/IMG_5937.JPG" alt="Baxter" class="active">
+                        <img src="images/IMG_5938.JPG" alt="Baxter">
+                        <img src="images/IMG_5939.JPG" alt="Baxter">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-baxter')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-baxter')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Baxter</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Loyal and confident, loves to follow you around.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Baxter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-rosie">
+                        <img src="images/IMG_6075.JPG" alt="Rosie" class="active">
+                        <img src="images/IMG_6076.JPG" alt="Rosie">
+                        <img src="images/IMG_6077.JPG" alt="Rosie">
+                        <img src="images/IMG_6078.JPG" alt="Rosie">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-rosie')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-rosie')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Rosie</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Bright and friendly, loves attention from everyone.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Rosie
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-jasper">
+                        <img src="images/IMG_6867.JPG" alt="Jasper" class="active">
+                        <img src="images/IMG_6868.JPG" alt="Jasper">
+                        <img src="images/IMG_6869.JPG" alt="Jasper">
+                        <img src="images/IMG_6870.JPG" alt="Jasper">
+                        <img src="images/IMG_6871.JPG" alt="Jasper">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-jasper')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-jasper')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Jasper</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Smart and energetic, always ready to play fetch.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Jasper
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-ruby">
+                        <img src="images/IMG_6872 - Copy.JPG" alt="Ruby" class="active">
+                        <img src="images/IMG_6872.JPG" alt="Ruby">
+                        <img src="images/IMG_6873.JPG" alt="Ruby">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-ruby')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-ruby')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Ruby</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Lovely and calm, a great choice for a warm family.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Ruby
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-teddy">
+                        <img src="images/IMG_6875.JPG" alt="Teddy" class="active">
+                        <img src="images/IMG_6876.JPG" alt="Teddy">
+                        <img src="images/IMG_6874.JPG" alt="Teddy">
+                        <img src="images/IMG_6877.JPG" alt="Teddy">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-teddy')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-teddy')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Teddy</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Cuddly and calm, enjoys naps after playtime.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Teddy
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-hazel">
+                        <img src="images/IMG_6881.JPG" alt="Hazel" class="active">
+                        <img src="images/IMG_6879.JPG" alt="Hazel">
+                        <img src="images/IMG_6880.JPG" alt="Hazel">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-hazel')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-hazel')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Hazel</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Friendly and bright, loves snuggling in laps.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Hazel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-leo">
+                        <img src="images/IMG_6885.JPG" alt="Leo" class="active">
+                        <img src="images/IMG_6883.JPG" alt="Leo">
+                        <img src="images/IMG_6884.JPG" alt="Leo">
+                        <img src="images/IMG_6886.JPG" alt="Leo">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-leo')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-leo')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Leo</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Bold and curious, enjoys learning new tricks.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Leo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-olive">
+                        <img src="images/IMG_6891.JPG" alt="Olive" class="active">
+                        <img src="images/IMG_6890.JPG" alt="Olive">
+                        <img src="images/IMG_6889.JPG" alt="Olive">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-olive')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-olive')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Olive</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Sweet and gentle, loves to stay close to her person.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Olive
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-cooper">
+                        <img src="images/IMG_6895.JPG" alt="Cooper" class="active">
+                        <img src="images/IMG_6896.JPG" alt="Cooper">
+                        <img src="images/IMG_6897.JPG" alt="Cooper">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-cooper')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-cooper')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Cooper</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Friendly and outgoing, enjoys playtime with other dogs.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Cooper
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-nala">
+                        <img src="images/IMG_6898.JPG" alt="Nala" class="active">
+                        <img src="images/IMG_6899.JPG" alt="Nala">
+                        <img src="images/IMG_6900.JPG" alt="Nala">
+                        <img src="images/IMG_6901.JPG" alt="Nala">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-nala')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-nala')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Nala</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Lively and loving, enjoys playtime and pets.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Nala
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-duke">
+                        <img src="images/IMG_6919.JPG" alt="Duke" class="active">
+                        <img src="images/IMG_6920.JPG" alt="Duke">
+                        <img src="images/IMG_6921.JPG" alt="Duke">
+                        <img src="images/IMG_6922.JPG" alt="Duke">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-duke')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-duke')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Duke</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Bold and playful, loves adventure and companionship.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Duke
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-mia">
+                        <img src="images/IMG_1961.jpg" alt="Mia" class="active">
+                        <img src="images/IMG_1959.jpg" alt="Mia">
+                        <img src="images/IMG_1960.jpg" alt="Mia">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-mia')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-mia')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Mia</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Affectionate and playful, she loves attention and cuddles.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Mia
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-henry">
+                        <img src="images/IMG_1962.jpg" alt="Henry" class="active">
+                        <img src="images/IMG_1963.jpg" alt="Henry">
+                        <img src="images/IMG_1964.jpg" alt="Henry">
+                        <img src="images/IMG_1965.jpg" alt="Henry">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-henry')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-henry')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Henry</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Loving and cheerful, enjoys snuggles and gentle play.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Henry
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-luna">
+                        <img src="images/IMG_1966.jpg" alt="Luna" class="active">
+                        <img src="images/IMG_1967.jpg" alt="Luna">
+                        <img src="images/IMG_1968.jpg" alt="Luna">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-luna')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-luna')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Luna</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Curious and sweet, she loves gentle snuggles and new friends.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Luna
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-toby">
+                        <img src="images/IMG_1969.jpg" alt="Toby" class="active">
+                        <img src="images/IMG_1970.jpg" alt="Toby">
+                        <img src="images/IMG_1971.jpg" alt="Toby">
+                        <img src="images/IMG_1972.jpg" alt="Toby">
+                        <img src="images/IMG_1973.jpg" alt="Toby">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-toby')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-toby')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Toby</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Friendly and playful, he enjoys chasing toys and cuddling.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Toby
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-zoey">
+                        <img src="images/IMG_1977.jpg" alt="Zoey" class="active">
+                        <img src="images/IMG_1979.jpg" alt="Zoey">
+                        <img src="images/IMG_1978.jpg" alt="Zoey">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-zoey')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-zoey')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Zoey</h3>
+                        <p>Female • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Gentle and bright, she is happy to cuddle and explore.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Zoey
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puppy-card">
+                    <div class="carousel" id="carousel-bruno">
+                        <img src="images/IMG_1983.jpg" alt="Bruno" class="active">
+                        <img src="images/IMG_1984.jpg" alt="Bruno">
+                        <img src="images/IMG_1985.jpg" alt="Bruno">
+                        <img src="images/IMG_1986.jpg" alt="Bruno">
+                        <img src="images/IMG_1987.jpg" alt="Bruno">
+                        <img src="images/IMG_1988.jpg" alt="Bruno">
+                        <img src="images/IMG_1989.jpg" alt="Bruno">
+                    </div>
+                    <div class="carousel-controls">
+                        <button onclick="previousImage('carousel-bruno')">❮ Prev</button>
+                        <button onclick="nextImage('carousel-bruno')">Next ❯</button>
+                    </div>
+                    <div class="puppy-info">
+                        <h3>Bruno</h3>
+                        <p>Male • 7 weeks</p>
+                        <p style="color: #666; font-size: 14px;">Confident and loyal, he loves attention and playtime.</p>
+                        <div class="puppy-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-heart"></i> Inquire About Bruno
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="info-box">
+                <h3>💡 What's Included with Your Puppy?</h3>
+                <ul>
+                    <li><strong>Initial Vaccinations:</strong> Up-to-date on all age-appropriate vaccines</li>
+                    <li><strong>Microchip:</strong> Registered with your information for safety</li>
+                    <li><strong>Veterinary Health Certificate:</strong> Issued by our trusted veterinarian</li>
+                    <li><strong>2-Year Health Guarantee:</strong> Protection against genetic health issues</li>
+                    <li><strong>Starter Kit:</strong> Sample of food, treats, and toys</li>
+                    <li><strong>Lifetime Support:</strong> We're here for any questions or concerns</li>
+                    <li><strong>AKC Registration:</strong> Eligible for registration (papers available)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="info-box">
+                <h3>🐾 Our Adoption Process</h3>
+                <p><strong>Step 1:</strong> Browse available puppies and contact us</p>
+                <p><strong>Step 2:</strong> Complete our adoption application</p>
+                <p><strong>Step 3:</strong> Phone consultation to discuss your lifestyle and preferences</p>
+                <p><strong>Step 4:</strong> Sign adoption contract and health agreement</p>
+                <p><strong>Step 5:</strong> Make deposit to reserve your puppy</p>
+                <p><strong>Step 6:</strong> Pickup or arrange transportation at 8-12 weeks old</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="info-box">
+                <h3>❓ Interested in a Puppy?</h3>
+                <p>Contact us today to inquire about available puppies, pricing, and to schedule a visit. We're happy to answer any questions you have about the dachshund breed and our breeding program.</p>
+                <p><a href="contact.html" style="color: #d2691e; font-weight: bold; text-decoration: none;">➤ Get in Touch</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Bracken Doxies. All rights reserved.</p>
+        <p>Breeding Excellence | Caring for Our Community</p>
+    </footer>
+
+    <script>
+        function nextImage(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const images = carousel.querySelectorAll('img');
+            let activeIndex = -1;
+            
+            images.forEach((img, index) => {
+                if (img.classList.contains('active')) {
+                    activeIndex = index;
+                    img.classList.remove('active');
+                }
+            });
+            
+            const nextIndex = (activeIndex + 1) % images.length;
+            images[nextIndex].classList.add('active');
+        }
+        
+        function previousImage(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const images = carousel.querySelectorAll('img');
+            let activeIndex = -1;
+            
+            images.forEach((img, index) => {
+                if (img.classList.contains('active')) {
+                    activeIndex = index;
+                    img.classList.remove('active');
+                }
+            });
+            
+            const prevIndex = activeIndex === 0 ? images.length - 1 : activeIndex - 1;
+            images[prevIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>
